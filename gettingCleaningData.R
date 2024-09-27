@@ -12,3 +12,21 @@ allTables<- dbListTables(hg19)
 hg19Fields<- dbListFields(hg19,"tablename")
 ## run a query
 hg19Query <- (hg19, "select count(*) from tablename")
+
+## get the whole table
+affyData <- dbReadTable(hg19, "tablename")
+head(affyData)
+
+## query table using SQL code
+query <- dbSendQuery (hg19, "select * from ********")
+affyMis <- fetch (query); quantile (affyMisMatches)
+
+## pull in only a few
+affyMisSmall <- fetch(query, n=10); 
+
+## make sure you clear the query
+dbClearResult(query)
+##returns TRUE
+
+## don't FORGET TO CLOSE THE CONNECTION
+dbDisconnect (hg19)
